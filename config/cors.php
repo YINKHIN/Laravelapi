@@ -29,6 +29,11 @@ return [
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
+    // 'supports_credentials' => false,
+      'paths' => ['api/*'],
+    'allowed_methods' => ['*'],
+    'allowed_origins' => ['https://test-react-po-sims.vercel.app'],
+    'allowed_headers' => ['*'],
+    'supports_credentials' => true,
 
 ];

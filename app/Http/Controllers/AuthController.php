@@ -225,7 +225,7 @@ class AuthController extends Controller
     {
         try {
             // Delete the current access token
-            $request->user()->currentAccessToken()->delete();
+            // $request->user()->currentAccessToken()->delete();
 
             return response()->json([
                 'success' => true,
