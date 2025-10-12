@@ -141,16 +141,52 @@ class AuthController extends Controller
     /**
      * Update user profile
      */
-    public function update(Request $request, string $id)
-    {
-        // Authorization check: Only allow update own profile
-        if (Auth::id() != $id) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Unauthorized - Can only update own profile'
-            ], 403);
-        }
+    // public function updateProfile(Request $request , $id)
+    // {
+    //       $user = User::findOrFail($id);
+    //     $validator = Validator::make($request->all(), [
+    //         'name' => 'sometimes|string|max:255',
+    //         'email' => 'sometimes|email|unique:users,email,' . $request->user()->id,
+    //         'phone' => 'sometimes|string|max:20',
+    //         'address' => 'sometimes|string|max:255',
+    //         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+    //     ]);
 
+    //     if ($validator->fails()) {
+    //         return response()->json([
+    //             'success' => false,
+    //             'message' => 'Validation Error',
+    //             'errors' => $validator->errors()
+    //         ], 422);
+    //     }
+
+    //     $user = $request->user();
+
+    //     // Update user data
+    //     if ($request->has(['name', 'email'])) {
+    //         $user->update($request->only(['name', 'email']));
+    //     }
+
+    //     // Update or create profile
+    //     $profileData = $request->only(['phone', 'address', 'image']);
+    //     if (!empty($profileData)) {
+    //         if ($user->profile) {
+    //             $user->profile->update($profileData);
+    //         } else {
+    //             Profile::create(array_merge($profileData, ['user_id' => $user->id]));
+    //         }
+    //     }
+
+    //     $user->load('profile');
+
+    //     return response()->json([
+    //         'success' => true,
+    //         'message' => 'Profile updated successfully',
+    //         'user' => $user
+    //     ]);
+    // }
+public function update(Request $request, string $id)
+    {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,'.$id,
@@ -225,7 +261,7 @@ class AuthController extends Controller
     {
         try {
             // Delete the current access token
-            $request->user()->currentAccessToken()->delete();
+            // $request->user()->currentAccessToken()->delete();
 
             return response()->json([
                 'success' => true,
