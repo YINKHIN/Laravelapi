@@ -36,14 +36,14 @@
     "LOG_CHANNEL": "stderr",
     "SESSION_DRIVER": "cookie",
     "DB_CONNECTION": "d1",
-    "CLOUDFLARE_D1_DATABASE_ID": "34083733-4353-4d45-ba42-8ad0beb19365",  # កែទៅ DB ID ត្រឹមត្រូវ
+    "CLOUDFLARE_D1_DATABASE_ID": "34083733-4353-4d45-ba42-8ad0beb19365", 
     "CLOUDFLARE_TOKEN": "AMdqKuwU9KDCskTzNL_83G5natanHNvBaRzd7jwq",
-    "CLOUDFLARE_ACCOUNT_ID": "10a85e4740c137ac7e5c340a17fb5341",  # កែទៅ Account ID ត្រឹមត្រូវ
-    "R2_ACCESS_KEY_ID": "43897ea16184e0472bc382c58948a",  # បន្ថែម R2 vars
+    "CLOUDFLARE_ACCOUNT_ID": "10a85e4740c137ac7e5c340a17fb5341", 
+    "R2_ACCESS_KEY_ID": "43897ea16184e0472bc382c58948a",
     "R2_SECRET_ACCESS_KEY": "53adfd2bcc36965f4faf68a9053a9048e1acac5c024d105fba12",
     "R2_BUCKET": "ims",
     "R2_ENDPOINT": "https://10a85e4740c137ac7e5c340a17fb5341.r2.cloudflared.com",
     "R2_URL": "https://pub-9c6a5c173845a74ae4b278f19.r2.dev/",
-    "SANCTUM_STATEFUL_DOMAINS": "inventory-react-app.pages.dev"  # domain React របស់អ្នក
+    "SANCTUM_STATEFUL_DOMAINS": "inventory-react-app.pages.dev"  
   }
 }
