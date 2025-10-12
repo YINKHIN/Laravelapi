@@ -58,7 +58,7 @@ class ProductController extends Controller
         // handle image
         $imageUrl = null;
         if ($request->hasFile('image')) {
-            $imageUrl = $request->file('image')->store('product', 'public');
+            $imageUrl = $request->file('image')->store('product', 'r2');
         }
         Product::create([
             'category_id' => $request->category_id,
@@ -106,12 +106,12 @@ class ProductController extends Controller
         // handle image
         if ($request->hasFile('image')) {
             if ($product->image) {
-                Storage::disk('public')->delete($product->image);
+                Storage::disk('r2')->delete($product->image);
             }
-            $product->image = $request->file('image')->store('product', 'public');
+            $product->image = $request->file('image')->store('product', 'r2');
         } else if ($request->has('delete_image')) {
             if ($product->image) {
-                Storage::disk('public')->delete($product->image);
+                Storage::disk('r2')->delete($product->image);
                 $product->image = null;
             }
         }

@@ -11,9 +11,10 @@
     "require": {
         "php": "^8.1",
         "barryvdh/laravel-dompdf": "^2.2 || dev-master",
-        "laravel/framework": "^10.0",
+        "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.2",
         "laravel/tinker": "^2.10.1",
+        "ntanduy/cloudflare-d1-database": "^0.2.2",
         "phpoffice/phpword": "^1.4",
         "tymon/jwt-auth": "^2.2"
     },

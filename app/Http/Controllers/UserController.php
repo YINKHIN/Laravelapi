@@ -70,7 +70,7 @@ class UserController extends Controller
         
         // Handle image upload
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('uploads/profiles', 'public');
+            $imagePath = $request->file('image')->store('uploads/profiles', 'r2');
             $profileData['image'] = $imagePath;
         }
         
@@ -147,12 +147,12 @@ class UserController extends Controller
         // Handle image upload
         if ($request->hasFile('image')) {
             // Delete old image if exists
-            if ($profile->image && Storage::disk('public')->exists($profile->image)) {
-                Storage::disk('public')->delete($profile->image);
+            if ($profile->image && Storage::disk('r2')->exists($profile->image)) {
+                Storage::disk('r2')->delete($profile->image);
             }
             
             // Store new image
-            $imagePath = $request->file('image')->store('uploads/profiles', 'public');
+            $imagePath = $request->file('image')->store('uploads/profiles', 'r2');
             $profile->image = $imagePath;
         }
         
@@ -189,8 +189,8 @@ class UserController extends Controller
 
         // Delete profile image if exists
         if ($user->profile && $user->profile->image) {
-            if (Storage::disk('public')->exists($user->profile->image)) {
-                Storage::disk('public')->delete($user->profile->image);
+            if (Storage::disk('r2')->exists($user->profile->image)) {
+                Storage::disk('r2')->delete($user->profile->image);
             }
         }
 

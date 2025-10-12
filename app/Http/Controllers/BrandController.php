@@ -34,7 +34,7 @@ class BrandController extends Controller
         // handle image
         $imageUrl = null;
         if($request->hasFile("image")){
-            $imageUrl = $request->file("image")->store("brands","public");
+            $imageUrl = $request->file("image")->store("brands","r2");
         }
         
         Brand::create([
@@ -76,12 +76,12 @@ class BrandController extends Controller
         // handle image
         if($request->hasFile("image")){
             if($brand->image){
-                Storage::disk("public")->delete($brand->image);
+                Storage::disk("r2")->delete($brand->image);
             }
-            $brand->image = $request->file("image")->store("brands","public");
+            $brand->image = $request->file("image")->store("brands","r2");
         } else if ($request->has('delete_image')) {
             if($brand->image){
-                Storage::disk("public")->delete($brand->image);
+                Storage::disk("r2")->delete($brand->image);
                 $brand->image = null;
             }
         }
@@ -113,7 +113,7 @@ class BrandController extends Controller
         }
         
         if($brand->image){
-            Storage::disk("public")->delete($brand->image);
+            Storage::disk("r2")->delete($brand->image);
         }
         
         $brand->delete();

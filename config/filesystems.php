@@ -2,7 +2,6 @@
 
 return [
     'default' => env('FILESYSTEM_DISK', 'local'),
-
     'disks' => [
         'local' => [
             'driver' => 'local',
@@ -24,10 +23,23 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
+        'r2' => [
+            'driver' => 's3',
+            'key' => env('R2_ACCESS_KEY_ID'),
+            'secret' => env('R2_SECRET_ACCESS_KEY'),
+            'region' => 'auto',
+            'bucket' => env('R2_BUCKET', 'ims'),
+            'url' => env('R2_URL'),
+            // 'endpoint' => env('R2_ENDPOINT'),
+            // 'use_path_style_endpoint' => true,
+            'endpoint' => env('R2_ENDPOINT', 'https://10a85e4740c137ac7e5c340a17fb5341.r2.cloudflared.com'),  // Account ID របស់អ្នក
+            'use_path_style_endpoint' => true,
+            'options' => [
+                'ServerSideEncryption' => 'AES256',
+            ],
+        ],
     ],
-
     'links' => [
         public_path('storage') => storage_path('app/public'),
     ],
 ];
-

@@ -54,7 +54,7 @@ class CategoryController extends Controller
         // handle image
         $imageUrl = null;
         if ($request->hasFile('image')) {
-            $imageUrl = $request->file('image')->store('categories', 'public');
+            $imageUrl = $request->file('image')->store('categories', 'r2');
         }
 
         Category::create([
@@ -98,12 +98,12 @@ class CategoryController extends Controller
         // handle image
         if ($request->hasFile('image')) {
             if ($category->image) {
-                Storage::disk('public')->delete($category->image);
+                Storage::disk('r2')->delete($category->image);
             }
-            $category->image = $request->file('image')->store('categories', 'public');
+            $category->image = $request->file('image')->store('categories', 'r2');
         } else if ($request->has('delete_image')) {
             if ($category->image) {
-                Storage::disk('public')->delete($category->image);
+                Storage::disk('r2')->delete($category->image);
                 $category->image = null;
             }
         }

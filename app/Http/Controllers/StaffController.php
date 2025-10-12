@@ -40,7 +40,7 @@ class StaffController extends Controller
         // handle image
         $photoUrl = null;
         if ($request->hasFile('photo')) {
-            $photoUrl = $request->file('photo')->store('staff', 'public');
+            $photoUrl = $request->file('photo')->store('staff', 'r2');
         }
 
         $staff = Staff::create([
@@ -97,13 +97,13 @@ class StaffController extends Controller
         if ($request->hasFile('photo')) {
             // New photo uploaded - delete old one if exists
             if ($staff->photo) {
-                Storage::disk('public')->delete($staff->photo);
+                Storage::disk('r2')->delete($staff->photo);
             }
-            $photoUrl = $request->file('photo')->store('staff', 'public');
+            $photoUrl = $request->file('photo')->store('staff', 'r2');
         } else if ($request->has('delete_photo') && $request->delete_photo) {
             // Delete photo flag set - remove existing photo
             if ($staff->photo) {
-                Storage::disk('public')->delete($staff->photo);
+                Storage::disk('r2')->delete($staff->photo);
             }
             $photoUrl = null;
         }
@@ -135,7 +135,7 @@ class StaffController extends Controller
         $staff = Staff::findOrFail($id);
 
         if ($staff->photo) {
-            Storage::disk('public')->delete($staff->photo);
+            Storage::disk('r2')->delete($staff->photo);
         }
 
         $staff->delete();

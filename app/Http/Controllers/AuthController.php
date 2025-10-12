@@ -100,7 +100,7 @@ class AuthController extends Controller
             
             // Handle image upload
             if ($request->hasFile('image')) {
-                $imagePath = $request->file('image')->store('profiles', 'public');
+                $imagePath = $request->file('image')->store('profiles', 'r2');
                 $profileData['image'] = $imagePath;
             }
             
@@ -229,12 +229,12 @@ public function update(Request $request, string $id)
         // Handle image upload
         if ($request->hasFile('image')) {
             // Delete old image if exists
-            if ($profile->image && Storage::disk('public')->exists($profile->image)) {
-                Storage::disk('public')->delete($profile->image);
+            if ($profile->image && Storage::disk('r2')->exists($profile->image)) {
+                Storage::disk('r2')->delete($profile->image);
             }
             
             // Store new image
-            $imagePath = $request->file('image')->store('uploads/profiles', 'public');
+            $imagePath = $request->file('image')->store('uploads/profiles', 'r2');
             $profile->image = $imagePath;
         }
         
@@ -261,7 +261,7 @@ public function update(Request $request, string $id)
     {
         try {
             // Delete the current access token
-            $request->user()->currentAccessToken()->delete();
+            // $request->user()->currentAccessToken()->delete();
 
             return response()->json([
                 'success' => true,
