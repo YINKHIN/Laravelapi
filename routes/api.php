@@ -25,14 +25,12 @@ use Illuminate\Support\Facades\Route;
  * | be assigned to the "api" middleware group. Make something great!
  * |
  */
-Route::apiResource('auth', AuthController::class);
 
-// The following routes are for example purposes
-// These routes do not require authentication
-// Route::apiResource('categories', CategoryController::class);
-// Route::apiResource('products', ProductController::class);
-// Route::apiResource('staffs', StaffController::class);
-// Route::apiResource('brands', BrandController::class);
+// Public routes (no authentication required)
+Route::get('products', [ProductController::class, 'index']);
+Route::get('products/{id}', [ProductController::class, 'show']);
+Route::get('categories', [CategoryController::class, 'index']);
+Route::get('categories/{id}', [CategoryController::class, 'show']);
 
 // Authentication routes
 Route::prefix('auth')->group(function () {
@@ -55,15 +53,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('suppliers/{id}', [SupplierController::class, 'show']);
     Route::get('staffs', [StaffController::class, 'index']);
     Route::get('staffs/{id}', [StaffController::class, 'show']);
-    // Route::apiResource('staffs', StaffController::class);
     Route::get('customers', [CustomerController::class, 'index']);
     Route::get('customers/{id}', [CustomerController::class, 'show']);
-    Route::get('categories', [CategoryController::class, 'index']);
-    Route::get('categories/{id}', [CategoryController::class, 'show']);
     Route::get('brands', [BrandController::class, 'index']);
     Route::get('brands/{id}', [BrandController::class, 'show']);
-    Route::get('products', [ProductController::class, 'index']);
-    Route::get('products/{id}', [ProductController::class, 'show']);
+    // Route::get('products', [ProductController::class, 'index']);  // Moved to public routes
+    // Route::get('products/{id}', [ProductController::class, 'show']);  // Moved to public routes
+    // Route::get('categories', [CategoryController::class, 'index']);  // Moved to public routes
+    // Route::get('categories/{id}', [CategoryController::class, 'show']);  // Moved to public routes
     Route::get('imports', [ImportController::class, 'index']);
     Route::get('imports/{id}', [ImportController::class, 'show']);
     Route::get('orders', [OrderController::class, 'index']);
@@ -84,7 +81,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('staffs', [StaffController::class, 'store']);
         Route::put('staffs/{id}', [StaffController::class, 'update']);
         Route::delete('staffs/{id}', [StaffController::class, 'destroy']);
-        // Route::apiResource('staffs', StaffController::class);
 
         Route::post('customers', [CustomerController::class, 'store']);
         Route::put('customers/{id}', [CustomerController::class, 'update']);

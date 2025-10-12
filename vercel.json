@@ -2,7 +2,9 @@
     "version": 2,
     "framework": null,
     "functions": {
-        "api/index.php": { "runtime": "vercel-php@0.7.3" }
+        "api/index.php": {
+            "runtime": "vercel-php@0.7.3"
+        }
     },
     "routes": [
         {
@@ -34,8 +36,8 @@
         "LOG_CHANNEL": "stderr",
         "SESSION_DRIVER": "cookie",
         "DB_CONNECTION": "d1",
-        "CLOUDFLARE_D1_DATABASE_ID": "your-database-id",
-        "CLOUDFLARE_TOKEN": "your-cloudflare-token",
-        "CLOUDFLARE_ACCOUNT_ID": "your-account-id"
+        "CLOUDFLARE_D1_DATABASE_ID": "10a85e4740c137ac7e5c340a17fb5341",
+        "CLOUDFLARE_TOKEN": "AMdqKuwU9KDCskTzNL_83G5natanHNvBaRzd7jwq",
+        "CLOUDFLARE_ACCOUNT_ID": "34083733-4353-4d45-ba42-8ad0beb19365"
     }
 }

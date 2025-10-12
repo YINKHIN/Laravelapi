@@ -36,14 +36,13 @@ class ProductController extends Controller
         return response()->json([
             'success' => true,
             'data' => $products,
-            'list'=> Product::with('category'),
+            'list'=> $products,
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-
     public function store(Request $request)
     {
         $request->validate([
@@ -55,12 +54,14 @@ class ProductController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10248',
             'status' => 'required|in:active,inactive'
         ]);
+        
         // handle image
         $imageUrl = null;
         if ($request->hasFile('image')) {
             $imageUrl = $request->file('image')->store('product', 'r2');
         }
-        Product::create([
+        
+        $product = Product::create([
             'category_id' => $request->category_id,
             'pro_name' => $request->pro_name,
             'qty' => $request->qty,
@@ -72,7 +73,8 @@ class ProductController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Insert successfully!'
+            'message' => 'Insert successfully!',
+            'data' => $product->load('category')
         ]);
     }
 
@@ -103,6 +105,7 @@ class ProductController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,Webp|max:10248',
             'status' => 'required|in:active,inactive'
         ]);
+        
         // handle image
         if ($request->hasFile('image')) {
             if ($product->image) {
@@ -115,6 +118,7 @@ class ProductController extends Controller
                 $product->image = null;
             }
         }
+        
         $product->update([
             'category_id' => $request->category_id,
             'pro_name' => $request->pro_name,
@@ -123,10 +127,11 @@ class ProductController extends Controller
             'sup' => $request->sup,
             'status' => $request->status
         ]);
+        
         return response()->json([
             'success' => true,
             'message' => 'Update successfully!',
-            'data' => $product
+            'data' => $product->fresh()->load('category')
         ]);
     }
 
@@ -136,6 +141,12 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         $product = Product::findOrFail($id);
+        
+        // Delete image if exists
+        if ($product->image) {
+            Storage::disk('r2')->delete($product->image);
+        }
+        
         $product->delete();
         return response()->json([
             'success' => true,

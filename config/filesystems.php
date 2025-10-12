@@ -29,9 +29,7 @@ return [
             'secret' => env('R2_SECRET_ACCESS_KEY'),
             'region' => 'auto',
             'bucket' => env('R2_BUCKET', 'ims'),
-            'url' => env('R2_URL'),
-            // 'endpoint' => env('R2_ENDPOINT'),
-            // 'use_path_style_endpoint' => true,
+            'url' => env('R2_URL'),  // ឧ. https://pub-9c6a5c173845a74ae4b278f19.r2.dev/
             'endpoint' => env('R2_ENDPOINT', 'https://10a85e4740c137ac7e5c340a17fb5341.r2.cloudflared.com'),  // Account ID របស់អ្នក
             'use_path_style_endpoint' => true,
             'options' => [
