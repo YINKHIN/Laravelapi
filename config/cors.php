@@ -19,7 +19,17 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [
+        'http://localhost:5173',
+        'http://localhost:5174',
+        'http://localhost:5175',
+        'http://localhost:5176',
+        'https://test-react-posims.vercel.app',
+        'https://test-reactposims.vercel.app',
+        'https://test-reactposims-git-main-yin-khins-projects.vercel.app',
+        'https://test-reactposims-3vivu3vr4-yin-khins-projects.vercel.app',
+        'https://laravelapi-1-zlqg.onrender.com'
+    ],
 
     'allowed_origins_patterns' => [],
 
@@ -29,11 +39,6 @@ return [
 
     'max_age' => 0,
 
-    // 'supports_credentials' => false,
-      'paths' => ['api/*'],
-    'allowed_methods' => ['*'],
-    'allowed_origins' => ['https://test-react-po-sims.vercel.app'],
-    'allowed_headers' => ['*'],
-    'supports_credentials' => true,
+    'supports_credentials' => false,
 
 ];
