@@ -49,6 +49,6 @@
     "R2_BUCKET": "ims",
     "R2_ENDPOINT": "https://10a85e4740c137ac7e5c340a17fb5341.r2.cloudflared.com",
     "R2_URL": "https://pub-9c6a5c173845a74ae4b278f19.r2.dev/",
-    "SANCTUM_STATEFUL_DOMAINS": "your-react-domain.pages.dev" 
+    "SANCTUM_STATEFUL_DOMAINS": "localhost:5173,localhost:5174,localhost:5175,localhost:5176,127.0.0.1:5173,127.0.0.1:5174,127.0.0.1:5175,127.0.0.1:5176" 
   }
 }
