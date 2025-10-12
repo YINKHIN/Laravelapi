@@ -1,43 +1,54 @@
 {
-    "version": 2,
-    "framework": null,
-    "functions": {
-        "api/index.php": {
-            "runtime": "vercel-php@0.7.3"
-        }
-    },
-    "routes": [
-        {
-            "src": "/build/(.*)",
-            "dest": "/build/$1"
-        },
-        {
-            "src": "/(.*\\.(?:css|js|png|jpg|jpeg|gif|svg|ico|ttf|woff|woff2|eot|otf|webp|avif|txt))$",
-            "dest": "/public/$1"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/api/index.php"
-        }
-    ],
-    "outputDirectory": "public",
-    "env": {
-        "APP_ENV": "production",
-        "APP_DEBUG": "true",
-        "APP_URL": "https://ah-toch-store-laravel.vercel.app",
-        "APP_KEY": "base64:+6EWhJTm8D/scYLHv1Sgpp25epb0bks54ySI73oDcHk=",
-        "APP_CONFIG_CACHE": "/tmp/config.php",
-        "APP_EVENTS_CACHE": "/tmp/events.php",
-        "APP_PACKAGES_CACHE": "/tmp/packages.php",
-        "APP_ROUTES_CACHE": "/tmp/routes.php",
-        "APP_SERVICES_CACHE": "/tmp/services.php",
-        "VIEW_COMPILED_PATH": "/tmp",
-        "CACHE_DRIVER": "array",
-        "LOG_CHANNEL": "stderr",
-        "SESSION_DRIVER": "cookie",
-        "DB_CONNECTION": "d1",
-        "CLOUDFLARE_D1_DATABASE_ID": "10a85e4740c137ac7e5c340a17fb5341",
-        "CLOUDFLARE_TOKEN": "AMdqKuwU9KDCskTzNL_83G5natanHNvBaRzd7jwq",
-        "CLOUDFLARE_ACCOUNT_ID": "34083733-4353-4d45-ba42-8ad0beb19365"
+  "version": 2,
+  "framework": null,
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.7.3",
+      "memory": 1024 
     }
+  },
+  "routes": [
+    {
+      "src": "/build/(.*)",
+      "dest": "/build/$1"
+    },
+    {
+      "src": "/(.*\\.(?:css|js|png|jpg|jpeg|gif|svg|ico|ttf|woff|woff2|eot|otf|webp|avif|txt))$",
+      "dest": "/public/$1"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.php"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.php"
+    }
+  ],
+  "outputDirectory": "public",
+  "env": {
+    "APP_ENV": "production",
+    "APP_DEBUG": "false", 
+    "APP_URL": "https://ah-toch-store-laravel.vercel.app",
+    "APP_KEY": "base64:+6EWhJTm8D/scYLHv1Sgpp25epb0bks54ySI73oDcHk=",
+    "APP_CONFIG_CACHE": "/tmp/config.php",
+    "APP_EVENTS_CACHE": "/tmp/events.php",
+    "APP_PACKAGES_CACHE": "/tmp/packages.php",
+    "APP_ROUTES_CACHE": "/tmp/routes.php",
+    "APP_SERVICES_CACHE": "/tmp/services.php",
+    "VIEW_COMPILED_PATH": "/tmp",
+    "CACHE_DRIVER": "array",
+    "LOG_CHANNEL": "stderr",
+    "SESSION_DRIVER": "cookie",
+    "DB_CONNECTION": "d1",
+    "CLOUDFLARE_D1_DATABASE_ID": "34083733-4353-4d45-ba42-8ad0beb19365", 
+    "CLOUDFLARE_TOKEN": "AMdqKuwU9KDCskTzNL_83G5natanHNvBaRzd7jwq",
+    "CLOUDFLARE_ACCOUNT_ID": "10a85e4740c137ac7e5c340a17fb5341", 
+    "R2_ACCESS_KEY_ID": "43897ea16184e0472bc382c58948a", 
+    "R2_SECRET_ACCESS_KEY": "53adfd2bcc36965f4faf68a9053a9048e1acac5c024d105fba12",
+    "R2_BUCKET": "ims",
+    "R2_ENDPOINT": "https://10a85e4740c137ac7e5c340a17fb5341.r2.cloudflared.com",
+    "R2_URL": "https://pub-9c6a5c173845a74ae4b278f19.r2.dev/",
+    "SANCTUM_STATEFUL_DOMAINS": "your-react-domain.pages.dev" 
+  }
 }
