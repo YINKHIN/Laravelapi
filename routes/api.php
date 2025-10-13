@@ -14,6 +14,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
  * |--------------------------------------------------------------------------
@@ -25,6 +26,28 @@ use Illuminate\Support\Facades\Route;
  * | be assigned to the "api" middleware group. Make something great!
  * |
  */
+
+// Health check route (no authentication required)
+Route::get('health', function (Request $request) {
+    try {
+        // Check database connection
+        DB::connection()->getPdo();
+        
+        return response()->json([
+            'status' => 'healthy',
+            'timestamp' => now()->toISOString(),
+            'database' => 'connected',
+            'message' => 'API is running normally'
+        ]);
+    } catch (Exception $e) {
+        return response()->json([
+            'status' => 'unhealthy',
+            'timestamp' => now()->toISOString(),
+            'error' => $e->getMessage(),
+            'message' => 'API requires attention'
+        ], 500);
+    }
+});
 
 // Public routes (no authentication required)
 Route::get('products', [ProductController::class, 'index']);

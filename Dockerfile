@@ -13,7 +13,8 @@ RUN apt-get update && apt-get install -y \
     libcurl4-openssl-dev \
     libicu-dev \
     libjpeg-dev \
-    libfreetype6-dev
+    libfreetype6-dev \
+    default-mysql-client
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -37,11 +38,8 @@ COPY . .
 # Install dependencies
 RUN composer install --optimize-autoloader --no-dev
 
-# Generate app key
-RUN php artisan key:generate
-
-# Run migrations
-RUN php artisan migrate --force
+# Generate app key if not exists
+RUN php artisan key:generate || true
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache \
@@ -50,4 +48,8 @@ RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache \
 # Expose port 80
 EXPOSE 80
 
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost/ || exit 1
+
+CMD ["apache2-foreground"]

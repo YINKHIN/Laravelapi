@@ -1,0 +1,42 @@
+services:
+  - type: web
+    name: laravel-api
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /
+    envVars:
+      - key: APP_KEY
+        value: base64:JyUoiNJqH6gYGH5p08m4MuyezcdQW2h+wS8uXvBXskc=
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: 3306
+      - key: DB_DATABASE
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: R2_ACCESS_KEY_ID
+        value: 43897ea16184e0472bc382c58948a
+      - key: R2_SECRET_ACCESS_KEY
+        value: 53adfd2bcc36965f4faf68a9053a9048e1acac5c024d105fba12
+      - key: R2_BUCKET
+        value: ims
+      - key: R2_ENDPOINT
+        value: https://10a85e4740c137ac7e5c340a17fb5341.r2.cloudflarestorage.com
+      - key: R2_URL
+        value: https://pub-2c96a5cd17304e56a47ae8427a87f19a.r2.dev/
+
+databases:
+  - name: laravel-db
+    databaseName: inventory_db
+    user: inventory_user
+    plan: free
