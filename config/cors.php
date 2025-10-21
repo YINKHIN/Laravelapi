@@ -1,15 +1,9 @@
 <?php
 
 return [
-    'paths' => ['api/*', 'sanctum/csrf-cookie', 'auth/*'],
+    'paths' => ['api/*'],
     'allowed_methods' => ['*'],
-    'allowed_origins' => [
-        'http://localhost:5173',
-        'https://inventory-react-app.pages.dev',
-    ],
-    'allowed_origins_patterns' => [],
+    'allowed_origins' => ['https://inventory-react-app.pages.dev'],
     'allowed_headers' => ['*'],
-    'exposed_headers' => [],
-    'max_age' => 0,
     'supports_credentials' => true,
 ];

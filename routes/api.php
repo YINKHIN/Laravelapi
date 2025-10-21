@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ElementController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
@@ -26,6 +27,14 @@ use Illuminate\Support\Facades\DB;
  * | be assigned to the "api" middleware group. Make something great!
  * |
  */
+Route::get('/elements', [ElementController::class, 'index']);
+// CORS test endpoint
+Route::get('cors-test', function () {
+    return response()->json([
+        'message' => 'CORS is working correctly',
+        'timestamp' => now()->toISOString(),
+    ]);
+});
 
 // Health check route (no authentication required)
 Route::get('health', function (Request $request) {
@@ -59,6 +68,8 @@ Route::get('categories/{id}', [CategoryController::class, 'show']);
 Route::prefix('auth')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('register', [AuthController::class, 'register']);
+    Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
+    Route::post('reset-password', [AuthController::class, 'resetPassword']);
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('profile', [AuthController::class, 'profile']);
@@ -154,4 +165,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('payments/summary', [PaymentController::class, 'getPaymentSummary']);
     Route::get('payments/order/{orderId}/status', [PaymentController::class, 'getOrderPaymentStatus']);
     Route::post('payments/cleanup', [PaymentController::class, 'cleanupPaymentData']);
+});
+
+
+Route::get('/mongo-test', function () {
+    try {
+        $doc = DB::connection('mongodb')->getMongoClient()
+                ->management_system->test->insertOne(['ping' => now()->toISOString()]);
+        return response()->json(['mongodb' => 'connected', 'inserted_id' => (string) $doc->getInsertedId()]);
+    } catch (\Exception $e) {
+        return response()->json(['mongodb' => 'failed', 'error' => $e->getMessage()], 500);
+    }
 });

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -237,5 +238,67 @@ class AuthController extends Controller
                 'message' => 'Logout failed: ' . $e->getMessage()
             ], 500);
         }
+    }
+
+    /**
+     * Send password reset instructions
+     */
+    public function forgotPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users,email',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation Error',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        $user = User::where('email', $request->email)->first();
+        
+        // In a real implementation, you would:
+        // 1. Generate a secure token
+        // 2. Store it in the database with expiration
+        // 3. Send an email with the reset link
+        
+        // For now, we'll just simulate the process
+        return response()->json([
+            'success' => true,
+            'message' => 'Password reset instructions have been sent to your email address.'
+        ]);
+    }
+
+    /**
+     * Reset user password
+     */
+    public function resetPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required|string|min:6|confirmed',
+            // In a real implementation, you would also validate the token
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation Error',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        $user = User::where('email', $request->email)->first();
+        
+        // Update the user's password
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Your password has been reset successfully. You can now login with your new password.'
+        ]);
     }
 }

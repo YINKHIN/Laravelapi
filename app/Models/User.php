@@ -14,20 +14,18 @@ class User extends Authenticatable implements JWTSubject
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasApiTokens;
     
- // Return the unique identifier for the user
-        public function getJWTIdentifier()
-        {
-            return $this->getKey();
-        }
+    // Return the unique identifier for the user
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
 
-        // Return an array of custom claims for the JWT
-        public function getJWTCustomClaims()
-        {
-            return [];
-        }
+    // Return an array of custom claims for the JWT
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
     
-
-
     /**
      * The attributes that are mass assignable.
      *

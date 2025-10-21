@@ -21,6 +21,29 @@
     }
   ],
   "outputDirectory": "public",
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Credentials",
+          "value": "true"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization"
+        }
+      ]
+    }
+  ],
   "env": {
     "APP_ENV": "production",
     "APP_DEBUG": "false",
@@ -46,6 +69,6 @@
     "R2_BUCKET": "ims",
     "R2_ENDPOINT": "https://10a85e4740c137ac7e5c340a17fb5341.r2.cloudflarestorage.com",
     "R2_URL": "https://pub-2c96a5cd17304e56a47ae8427a87f19a.r2.dev/",
-    "SANCTUM_STATEFUL_DOMAINS": "test-reactposims.vercel.app"
+    "SANCTUM_STATEFUL_DOMAINS": "localhost:5173,127.0.0.1:5173,localhost:5174,127.0.0.1:5174,localhost:5175,127.0.0.1:5175,localhost:5176,127.0.0.1:5176,inventory-react-app.pages.dev,test-reactposims.vercel.app,test-reactposims-git-main-yin-khins-projects.vercel.app,test-reactposims-3vivu3vr4-yin-khins-projects.vercel.app"
   }
 }

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Product extends Model
 {
     use HasFactory;
-//      * Run the migrations.
 
     protected $fillable = [
         'pro_name',
@@ -35,7 +34,4 @@ class Product extends Model
     // {
     //     return $this->belongsTo(Brand::class);
     // }
-   
-
-   
 }
